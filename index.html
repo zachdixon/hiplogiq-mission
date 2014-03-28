@@ -40,6 +40,7 @@
         z-index: 2;
       }
       .value {
+        display: none;
         color: #00AEEF;
         font-size: 2em;
         font-weight: bold;
@@ -116,10 +117,11 @@
         window.setInterval(function(){
           var rand = values_list[Math.floor(Math.random() * values_list.length)];
           var value_el = $("<p class='value'>"+rand+"</p>");
+          $('body').append(value_el);
+
           var posx = (Math.random() * ($(document).width() - value_el.width())).toFixed();
           var posy = (Math.random() * ($(document).height() - value_el.height())).toFixed();
-          $('body').append(value_el);
-          value_el.css({'top': posy+"px", 'left': posx+"px"});
+          value_el.css({'top': posy+"px", 'left': posx+"px"}).show();
           window.setTimeout(function(){value_el.addClass(animation_classes[Math.round(Math.random())]);},300);
         }, 700);
       });
