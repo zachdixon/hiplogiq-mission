@@ -55,11 +55,11 @@
         position: absolute;
         z-index: 1;
         opacity: 1;
-        -webkit-transition     : all 4s cubic-bezier(0.15,0.3,0.9,1);
-        -moz-webkit-transition : all 4s cubic-bezier(0.15,0.3,0.9,1);
-        -o-webkit-transition   : all 4s cubic-bezier(0.15,0.3,0.9,1);
-        -ms-webkit-transition  : all 4s cubic-bezier(0.15,0.3,0.9,1);
-        transition             : all 4s cubic-bezier(0.15,0.3,0.9,1);
+        -webkit-transition     : all 3s cubic-bezier(0.15,0.3,0.9,1);
+        -moz-webkit-transition : all 3s cubic-bezier(0.15,0.3,0.9,1);
+        -o-webkit-transition   : all 3s cubic-bezier(0.15,0.3,0.9,1);
+        -ms-webkit-transition  : all 3s cubic-bezier(0.15,0.3,0.9,1);
+        transition             : all 3s cubic-bezier(0.15,0.3,0.9,1);
       }
       .value.zoom-out {
         -webkit-transform : scale(0.5);
@@ -67,11 +67,14 @@
         -o-transform      : scale(0.5);
         -ms-transform     : scale(0.5);
         transform         : scale(0.5);
-        -webkit-filter : blur(2px);
+/*        -webkit-filter : blur(2px);
         -moz-filter    : blur(2px);
         -o-filter      : blur(2px);
         -ms-filter     : blur(2px);
-        filter         : blur(2px);
+        filter         : blur(2px);*/
+        /* Better performance than blur filter and works in firefox */
+        color: transparent;
+        text-shadow: 0 0 30px rgba(0, 174, 239,1);
         opacity: 0;
       }
       .value.zoom-in {
@@ -81,11 +84,14 @@
         -o-transform      : scale(2);
         -ms-transform     : scale(2);
         transform         : scale(2);
-        -webkit-filter : blur(5px);
+/*        -webkit-filter : blur(5px);
         -moz-filter    : blur(5px);
         -o-filter      : blur(5px);
         -ms-filter     : blur(5px);
-        filter         : blur(5px);
+        filter         : blur(5px);*/
+        /* Better performance than blur filter and works in firefox */
+        color: transparent;
+        text-shadow: 0 0 30px rgba(0, 174, 239,1);
       }
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -130,7 +136,8 @@
           var posy = (Math.random() * ($(document).height() - value_el.height())).toFixed();
           value_el.css({'top': posy+"px", 'left': posx+"px"}).show();
           window.setTimeout(function(){value_el.addClass(animation_classes[Math.round(Math.random())]);},300);
-        }, 700);
+          window.setTimeout(function(){value_el.remove()},3000);
+        }, 1000);
       });
     </script>
   </head>
